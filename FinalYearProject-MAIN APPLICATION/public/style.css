@@ -1,0 +1,95 @@
+nav {
+    background-color: #563d7c;
+    color: white;
+    padding: 0.4% 6%;
+    display: flex;
+    justify-content: space-between;
+    font-family:  'Graphique';
+    opacity: 0.90;
+
+}
+
+nav ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+nav li {
+    list-style: none;
+}
+
+nav li a{
+    color: white;
+    text-decoration: none;   
+    font-weight: bold;
+    padding: 5px 8px;
+}
+
+nav li a:hover {
+    color: yellow;
+    text-decoration: none;
+}
+
+.register {
+    background-color: #563d7c;
+    position: relative;
+    left: 34%;
+    padding:3%;
+    border-radius: 1.1%;
+    width: 30%;
+    margin-top:5%;
+    margin-bottom: 3%;
+    box-shadow:8px 8px 8px #202121;
+    -webkit-box-shadow:8px 8px 8px  #202121;
+    -moz-box-shadow: 8px 8px 8px  #202121;
+    color: white;
+    opacity: 0.90;
+  }
+@media screen and (max-width: 750px) {
+    .register {
+        background-color: #563d7c;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); 
+        padding:3%;
+        border-radius: 3%;
+        width: 75%;
+        margin-top:3%;
+        margin-bottom: 3%;
+        box-shadow:8px 8px 8px #202121;
+        -webkit-box-shadow:8px 8px 8px  #202121;
+        -moz-box-shadow: 8px 8px 8px  #202121;
+      }
+}
+
+.register h1{
+    text-align: center;
+}
+
+
+  
+body{
+    background-image: url(./images/background2.jpg);
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.avatar-ctn{
+    background-color: orange;
+    text-align: center;
+}
+
+.avatar{
+    width: 65%;
+    border-bottom:  1px solid rgba(0,0,0,0.125);
+
+}
+
+.movietype{
+color:white;
+margin-left: 3%;
+margin-top: 3%;
+}

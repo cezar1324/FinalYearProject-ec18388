@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style/bootstrap.min.css">
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+
+    <div class="sidenav">
+        <a href="index.html">Add Movie</a>
+        <a href="delete.html">Delete Movie</a>
+        <a href="modifyuser.html">Modify User</a>
+        <a href="movielist.html">Movie List</a>
+    </div>
+
+    <div class="main">
+        <h2>Add a movie</h2>
+        <h3 id="response" style="text-align: center;color:blue"></h3>
+        <form id="myForm">
+            <div class="mb-3">
+                <label for="name" class="form-label">Movie Name</label>
+                <input type="text" class="form-control" id="name">
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Image</label>
+                <input type="file" class="form-control" id="image">
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" placeholder="Description of movie" id="description"
+                    style="height: 100px"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="type1" class="form-label">Type 1</label>
+                <input type="text" class="form-control" id="type1">
+            </div>
+            <div class="mb-3">
+                <label for="type2" class="form-label">Type 2</label>
+                <input type="text" class="form-control" id="type2">
+            </div>
+            <button class="btn btn-primary btn-block" onclick="add()">Submit</button>
+        </form>
+    </div>
+
+    <script>
+
+        var form = document.getElementById("myForm");
+        function handleForm(event) { event.preventDefault(); }
+        form.addEventListener('submit', handleForm);
+
+        async function postData(url = '', data = {}) {
+            const response = await fetch(url, {
+                method: 'POST',
+                mode: 'cors',
+                cache: 'no-cache',
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                redirect: 'follow',
+                referrerPolicy: 'no-referrer',
+                body: JSON.stringify(data)
+            });
+            return response.json();
+        }
+
+        function add() {
+            console.log("sadas");
+            var image = document.getElementById("image").value.replace("C:\\fakepath\\", "C:\\Users\\Cezar\\Desktop\\");
+            var name = document.getElementById("name").value;
+            var description = document.getElementById("description").value;
+            var type1 = document.getElementById("type1").value;
+            var type2 = document.getElementById("type2").value;
+            var response = document.getElementById("response");
+
+            if (name == "" || description == "" || type1 == "" || type2 == "") {
+                response.innerHTML = "A field is empty!";
+            }
+            else {
+                const datas = {
+                    name: name,
+                    image: image,
+                    description: description,
+                    type1: type1,
+                    type2: type2
+                };
+
+                postData('http://localhost:3000/add-movie', datas)
+                    .then(data => {
+                        if (data.add == 'true') {
+                            document.getElementById("response").innerHTML = "Added succesful!";
+                        }
+                        else {
+                            document.getElementById("response").innerHTML = "Error. Try again!";
+                        }
+                    });
+            }
+        }
+
+    </script>
+    
+</body>
+</html>

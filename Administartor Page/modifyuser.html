@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style/bootstrap.min.css">
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+    <div class="sidenav">
+        <a href="index.html">Add Movie</a>
+        <a href="delete.html">Delete Movie</a>
+        <a href="modifyuser.html">Modify User</a>
+        <a href="movielist.html">Movie List</a>
+    </div>
+    <div class="main">
+        <h2>Modify password of user</h2>
+        <h3 id="response" style="text-align: center;color:blue"></h3>
+        <form id="myForm">
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password">
+            </div>
+            <button class="btn btn-primary btn-block" onclick="modify()">Submit</button>
+        </form>
+    </div>
+    <script>
+
+        var form = document.getElementById("myForm");
+        function handleForm(event) { event.preventDefault(); }
+        form.addEventListener('submit', handleForm);
+
+        async function postData(url = '', data = {}) {
+            const response = await fetch(url, {
+                method: 'POST',
+                mode: 'cors',
+                cache: 'no-cache',
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                redirect: 'follow',
+                referrerPolicy: 'no-referrer',
+                body: JSON.stringify(data)
+            });
+            return response.json();
+        }
+
+        function modify() {
+            console.log("test1");
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            var response = document.getElementById("response");
+
+            if (email == "" || password == "") {
+                response.innerHTML = "Email or password are empty!";
+            }
+            else {
+                const datas = {
+                    email: email,
+                    password: password
+                };
+                postData('http://localhost:3000/modify-user', datas)
+                    .then(data => {
+                        if (data.modify == 'true') {
+                            document.getElementById("response").innerHTML = "Modify succesful!";
+                        }
+                        else {
+                            document.getElementById("response").innerHTML = "Something went wrong. Try again!";
+                        }
+                    });
+            }
+        }
+    </script>
+</body>
+</html>
